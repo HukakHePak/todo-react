@@ -1,29 +1,14 @@
-import { useState } from "react";
-
 export function CheckTaskRow(props) {
-    const { className, onChecked, value, onRemove } = props;
-    const [isChecked, setChecked] = useState(false);
-
+    const { className, onChecked, value, onRemove, checked } = props;
     const ownClass = `${className} task-row `;
 
     return (
         <li className={ ownClass }>
-            <input className={ ` ${ownClass}__check-box` }
-                type="checkbox" 
-                value={ isChecked } 
-                onChange={ () => {
-                    setChecked(!isChecked);
+            <input className={ ` ${ownClass}__check-box` } checked={ checked } type="checkbox" 
+                onChange={ onChecked } />
 
-                    if(onChecked) onChecked(isChecked);
-                }} />
-
-            <input className={ ` ${ownClass}__text` }
-                readOnly
-                type="text" value={ value } />
-
+            <input className={ ` ${ownClass}__text` } value={ value } type="text" readOnly />
             <button className={ ` ${ownClass}__close-btn` } onClick={ onRemove } />
         </li>
     );
 }
-
- /* deactive input */

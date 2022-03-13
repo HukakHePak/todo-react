@@ -6,26 +6,21 @@ export function CreateTaskBar(props) {
 
     const [ value, setValue ] = useState('');
 
+    function submitHandler(event) {
+        event.preventDefault();
+
+        onCreate(event.target.elements.newTask.value);     
+        setValue("");
+    }
+
     return (
-        <form className={ ownClass } onSubmit={ event=>  {
-            event.preventDefault();
-
-            const field = event.target.elements.newTask;
-
-            onCreate(field.value);     
-            setValue("");
-            }}>
+        <form className={ ownClass } onSubmit={ submitHandler }>
                 
-            <input className={ `${ownClass}__text` } 
-                type="text" 
-                placeholder={ placeholder } 
-                value={ value }
-                onChange={ event => setValue(event.target.value) } 
-                name="newTask" 
-                />
+            <input className={ `${ownClass}__text` } value={ value } placeholder={ placeholder } 
+                type="text" name="newTask" 
+                onChange={ event => setValue(event.target.value) } />
 
-            <input className={ `${ownClass}__add-btn` } 
-                type="submit" /> 
+            <input className={ `${ownClass}__add-btn` } type="submit" /> 
         </form>
     )
 }
