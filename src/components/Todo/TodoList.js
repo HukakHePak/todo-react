@@ -1,6 +1,7 @@
+import './TodoList.css';
 import { useEffect, useState } from "react";
-import { CheckTaskRow } from "./CheckTaskRow";
-import { CreateTaskBar } from "./CreateTaskBar";
+import { CheckTaskRow } from "../Task/CheckTaskRow";
+import { CreateTaskBar } from "../Task/CreateTaskBar";
 import uniqid from 'uniqid';
 import jsStorage from "js-storage";
 
@@ -10,18 +11,17 @@ export function TodoList(props) {
     const name = 'todo-list';
     const ownClass = className+ ' ' + name;
 
-    const taskStorage = jsStorage.initNamespaceStorage(title || name + uniqid()).localStorage;
+    const taskStorage = jsStorage.initNamespaceStorage(title + ' ' + name).localStorage;
 
     const [ tasks, setTasks ] = useState(taskStorage.get(name) || []);
 
     useEffect(() => taskStorage.set(name, tasks));
 
     function sortByCheck(task) {
-        return task.checked ? 1 : -1;      
+        return task.checked ? 1 : -1;
     }
 
     function createTaskRow(task) {
-        console.log(task)
         const { key, value, checked } = task;
 
         return (<CheckTaskRow className={ `${ownClass}__task`} key={ key } value={ value }
