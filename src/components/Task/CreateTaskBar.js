@@ -1,8 +1,7 @@
 import { useState } from "react";
 
 export function CreateTaskBar(props) {
-    const { className, onCreate, placeholder } = props;
-    const ownClass = `${className} task-bar`;
+    const { onCreate } = props;
 
     const [ value, setValue ] = useState('');
 
@@ -14,13 +13,18 @@ export function CreateTaskBar(props) {
     }
 
     return (
-        <form className={ ownClass } onSubmit={ submitHandler }>
+        <form className="task-bar" onSubmit={ submitHandler }>
                 
-            <input className={ `${ownClass}__text` } value={ value } placeholder={ placeholder } 
-                type="text" name="newTask" 
-                onChange={ event => setValue(event.target.value) } />
+            <input className="task-bar__text-inp"
+                placeholder="Write your task"
+                type="text"
+                name="newTask"
+                autoComplete="off"
+                value={ value } 
+                onChange={ event => setValue(event.target.value) } 
+            />
 
-            <input className={ `${ownClass}__add-btn` } type="submit" /> 
+            <input className="task-bar__add-btn" type="submit" value="+" /> 
         </form>
     )
 }

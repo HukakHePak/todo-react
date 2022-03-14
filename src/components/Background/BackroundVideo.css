@@ -1,0 +1,8 @@
+.background-video {
+  position: fixed;
+  top: 0;
+  -o-object-fit: cover;
+     object-fit: cover;
+  z-index: 1;
+}
+/*# sourceMappingURL=BackroundVideo.css.map */

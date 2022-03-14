@@ -4,17 +4,70 @@
     border: none
     shape: none
 
-.task-row__text
-    word-wrap: break-word;
-    color: white
-    width: 100%
-
-.task-row__close-btn
-    width: 24px
-    height: 24px 
-
-.task-row
+.task-row, .task-bar
+    padding: 8px
     display: flex
+    flex-direction: row
+    justify-content: space-between
+    border-left: 1px solid white
+    border-right: 1px solid white
+    border-radius: 6px
+
+.task-bar
+    width: 100%
+    gap: 8px
+
+.task-row__text, .task-bar__text-inp
+    display: block
+    font-size: 16px
+    color: white
+    max-width: 340px
+    width: 100%
+    word-wrap: break-word
+
+.task-bar__text-inp
+    max-width: none
+    background: transparent
+    color: white
+    padding-left: 10px
+
+.task-bar__text-inp:focus
+    outline: none
+    padding-left: 12px
+    border-bottom: 1px solid white
+    border-radius: 6px
+
+.task-bar__text-inp::placeholder
+    color: #ffffffa6
+
+.task-row__close-btn, .task-bar__add-btn
+    align-self: flex-start
+    width: 24px
+    height: 24px
+    color: transparent
+    background: url('./close_white_24dp.svg') no-repeat
+    background-size: cover
+
 
 .task-row__check-box
-    float: right
+    width: 21px
+    height: 21px
+    border: 1px solid white
+    border-radius: 100%
+    -webkit-appearance: none
+    appearance: none
+    display: flex
+    
+.task-row__check-box:checked:after
+    margin: auto
+    content: ' '
+    display: block
+    width: 15px
+    height: 15px
+    background: white
+    border-radius: 100%
+
+.task-bar__add-btn
+    transform: rotate(45deg)
+    width: 22px
+    height: 22px

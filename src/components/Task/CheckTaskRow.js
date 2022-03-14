@@ -1,16 +1,21 @@
 import './Task.css';
 
 export function CheckTaskRow(props) {
-    const { className, onChecked, value, onRemove, checked } = props;
-    const ownClass = `${className} task-row`;
+    const { onChecked, value, onRemove, checked } = props;
 
     return (
-        <li className={ ownClass }>
-            <input className={ ` ${ownClass}__check-box` } checked={ checked } type="checkbox" 
-                onChange={ onChecked } />
+        <li className="task-row">
+            <input className="task-row__check-box" 
+                type="checkbox" 
+                checked={ checked } 
+                onChange={ onChecked } 
+            />
 
-            <p className={ ` ${ownClass}__text` }> { value } </p>
-            <button className={ ` ${ownClass}__close-btn` } onClick={ onRemove } />
+            <p className="task-row__text"> { value } </p>
+
+            <button className="task-row__close-btn" 
+                onClick={ onRemove } > + 
+            </button>
         </li>
     );
 }
