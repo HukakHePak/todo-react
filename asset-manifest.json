@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.881b4fbd.css",
+    "main.js": "/static/js/main.d05a4335.js",
+    "static/js/787.336a5b3e.chunk.js": "/static/js/787.336a5b3e.chunk.js",
+    "static/media/background.png": "/static/media/background.c46434f7912dd930bca8.png",
+    "static/media/background-aot.mp4": "/static/media/background-aot.00d62a82da9abdb64070.mp4",
+    "index.html": "/index.html",
+    "main.881b4fbd.css.map": "/static/css/main.881b4fbd.css.map",
+    "main.d05a4335.js.map": "/static/js/main.d05a4335.js.map",
+    "787.336a5b3e.chunk.js.map": "/static/js/787.336a5b3e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.881b4fbd.css",
+    "static/js/main.d05a4335.js"
+  ]
+}
