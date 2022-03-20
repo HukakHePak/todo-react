@@ -14,14 +14,14 @@ body {
   height: 100vh;
   font-family: 'Roboto', sans-serif;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 300;
   font-size: 18px;
   line-height: 21px;
   color: white;
 }
 
 .App {
-  background: url("../public/img/background.png") no-repeat;
+  background-repeat: no-repeat;
   background-size: cover;
   display: -webkit-box;
   display: -ms-flexbox;

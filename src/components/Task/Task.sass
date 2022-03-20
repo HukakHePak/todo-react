@@ -1,3 +1,6 @@
+$main-border: 1px solid white
+$completed-color: #ffffff77
+
 *
     padding: 0
     margin: 0
@@ -5,69 +8,81 @@
     shape: none
 
 .task-row, .task-bar
-    padding: 8px
+    position: relative
+    padding: 8px 16px
+    left: 0
+    opacity: 1
     display: flex
     flex-direction: row
     justify-content: space-between
-    border-left: 1px solid white
-    border-right: 1px solid white
+    border-left: $main-border
+    border-right: $main-border
     border-radius: 6px
+    color: white
+    transition: all 0.5s
+
+.task-row
+    &:hover
+        border-color: $completed-color
+    &--start
+        left: -50%
+        opacity: 0
+    &--finish
+        left: 50%
+        opacity: 0
+    
 
 .task-bar
     width: 100%
     gap: 8px
+    border-color: $completed-color
+
+    &:hover
+        border-color: white
+
+    &-line
+        position: absolute
+        top: 6px
+        left: (386px - 86 / 2) / 2
+        width: 86px
+        height: 24px
+        border-bottom: $main-border
+        border-color: transparent
+        border-radius: 6px
+        transition: all 0.5s
+        z-index: 5
+
+    &-line--active
+        border-bottom: $main-border
+        width: 386px
+        left: 16px
 
 .task-row__text, .task-bar__text-inp
     display: block
     font-size: 16px
-    color: white
-    max-width: 340px
+    font-weight: 300
+    font-family: 'Roboto', sans-serif
+    font-style: normal
     width: 100%
     word-wrap: break-word
+    z-index: 10
+
+.task-row--checked
+    color: $completed-color
+    border-color: $completed-color
+    text-decoration: line-through
+
+    &:hover
+        border-color: white
 
 .task-bar__text-inp
     max-width: none
     background: transparent
     color: white
-    padding-left: 10px
+    padding: 0 10px
 
-.task-bar__text-inp:focus
-    outline: none
-    padding-left: 12px
-    border-bottom: 1px solid white
-    border-radius: 6px
+    &:focus
+        outline: none
 
-.task-bar__text-inp::placeholder
-    color: #ffffffa6
-
-.task-row__close-btn, .task-bar__add-btn
-    align-self: flex-start
-    width: 24px
-    height: 24px
-    color: transparent
-    background: url('./close_white_24dp.svg') no-repeat
-    background-size: cover
-
-
-.task-row__check-box
-    width: 21px
-    height: 21px
-    border: 1px solid white
-    border-radius: 100%
-    -webkit-appearance: none
-    appearance: none
-    display: flex
-    
-.task-row__check-box:checked:after
-    margin: auto
-    content: ' '
-    display: block
-    width: 15px
-    height: 15px
-    background: white
-    border-radius: 100%
-
-.task-bar__add-btn
-    transform: rotate(45deg)
-    width: 22px
-    height: 22px
+    &::placeholder
+        color: $completed-color

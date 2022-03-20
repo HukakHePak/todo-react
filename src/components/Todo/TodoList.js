@@ -1,18 +1,25 @@
 import './TodoList.css';
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { CheckTaskRow } from "../Task/CheckTaskRow";
 import { CreateTaskBar } from "../Task/CreateTaskBar";
 import uniqid from 'uniqid';
 import jsStorage from "js-storage";
 
 export function TodoList(props) {
-    const { title } = props;
+    const { title, timeout } = props;
 
     const taskStorage = jsStorage.initNamespaceStorage(title + '_to-do_list').localStorage;
 
     const [ tasks, setTasks ] = useState(taskStorage.get('list') || []);
 
-    useEffect(() => taskStorage.set('list', tasks));
+    // useEffect(() => {
+    //     taskStorage.set('list', tasks)
+    //     console.log('effect')
+    // });
+
+    // useLayoutEffect(() => {
+    //     console.log('layout')
+    // })
 
     function sortByCheck(task) {
         return task.checked ? 1 : -1;
@@ -45,7 +52,8 @@ export function TodoList(props) {
                         task.checked = task.key === key ? !task.checked : task.checked;
                         return task;
                     }))
-                } 
+                }
+                timeout={timeout}
             />
         );
     }

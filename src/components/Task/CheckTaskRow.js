@@ -1,21 +1,40 @@
-import './Task.css';
+import { useEffect, useLayoutEffect, useState } from "react";
+import "./Task.css";
 
 export function CheckTaskRow(props) {
-    const { onChecked, value, onRemove, checked } = props;
+  const { onChecked, value, onRemove, checked, timeout } = props;
 
-    return (
-        <li className="task-row">
-            <input className="task-row__check-box" 
-                type="checkbox" 
-                checked={ checked } 
-                onChange={ onChecked } 
-            />
+  const [ style, setStyle ] = useState('task-row--start');
 
-            <p className="task-row__text"> { value } </p>
+  useEffect(() => {
+    if(style === 'task-row--start') {
+      setTimeout(() => setStyle(''), 0);
+    }
+  })
 
-            <button className="task-row__close-btn" 
-                onClick={ onRemove } > + 
-            </button>
-        </li>
-    );
+  let time = 0;
+
+  return (
+    <li
+      className={"task-row " + (checked ? "task-row--checked" : "") + ' ' + style }
+      onMouseDown={() => {
+        time = new Date();
+
+        setTimeout(() => {
+          if (time === 0) return;
+
+          setStyle('task-row--finish');
+          setTimeout(() => onRemove(), 500);
+        }, timeout);
+      }}
+      onMouseUp={() => {
+        if (new Date() - time > timeout) return;
+
+        onChecked();
+        time = 0;
+      }}
+    >
+      <p className="task-row__text"> {value} </p>
+    </li>
+  );
 }
