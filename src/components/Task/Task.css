@@ -42,6 +42,10 @@
   opacity: 0;
 }
 
+.task-row--hold {
+  background: #ff000038;
+}
+
 .task-bar {
   width: 100%;
   gap: 8px;

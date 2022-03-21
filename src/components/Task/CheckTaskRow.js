@@ -1,8 +1,11 @@
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./Task.css";
 
+const delay = 700;
+let time = 0;
+
 export function CheckTaskRow(props) {
-  const { onChecked, value, onRemove, checked, timeout } = props;
+  const { onChecked, value, onRemove, checked } = props;
 
   const [ style, setStyle ] = useState('task-row--start');
 
@@ -10,9 +13,7 @@ export function CheckTaskRow(props) {
     if(style === 'task-row--start') {
       setTimeout(() => setStyle(''), 0);
     }
-  })
-
-  let time = 0;
+  });
 
   return (
     <li
@@ -20,19 +21,23 @@ export function CheckTaskRow(props) {
       onMouseDown={() => {
         time = new Date();
 
+        setStyle('task-row--hold');
+        
         setTimeout(() => {
           if (time === 0) return;
 
           setStyle('task-row--finish');
-          setTimeout(() => onRemove(), 500);
-        }, timeout);
+          setTimeout(() => onRemove(), delay);
+        }, delay);
       }}
       onMouseUp={() => {
-        if (new Date() - time > timeout) return;
-
+        if (new Date() - time > delay) return;
+        
+        setStyle('');
         onChecked();
-        time = 0;
-      }}
+
+        time = 0; 
+       }}
     >
       <p className="task-row__text"> {value} </p>
     </li>

@@ -1,25 +1,18 @@
 import './TodoList.css';
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { CheckTaskRow } from "../Task/CheckTaskRow";
 import { CreateTaskBar } from "../Task/CreateTaskBar";
-import uniqid from 'uniqid';
+import { createTask } from '../../todo/createTask';
 import jsStorage from "js-storage";
 
 export function TodoList(props) {
-    const { title, timeout } = props;
+    const { title, list } = props;
 
-    const taskStorage = jsStorage.initNamespaceStorage(title + '_to-do_list').localStorage;
+    const storage = jsStorage.initNamespaceStorage(title + '_to-do_list').localStorage;
 
-    const [ tasks, setTasks ] = useState(taskStorage.get('list') || []);
+    const [ tasks, setTasks ] = useState(storage.get('list') || list || []);
 
-    // useEffect(() => {
-    //     taskStorage.set('list', tasks)
-    //     console.log('effect')
-    // });
-
-    // useLayoutEffect(() => {
-    //     console.log('layout')
-    // })
+    useEffect(() => storage.set('list', tasks.length ? tasks : undefined));
 
     function sortByCheck(task) {
         return task.checked ? 1 : -1;
@@ -28,12 +21,7 @@ export function TodoList(props) {
     function createTaskHandler(value) {
         if(!value) return;
 
-        setTasks([...tasks, {
-            value,
-            key: uniqid(),
-            checked: false,
-          }
-        ]); 
+        setTasks([...tasks, createTask(value)]); 
     }
 
     function createTaskRow(task) {
@@ -53,7 +41,6 @@ export function TodoList(props) {
                         return task;
                     }))
                 }
-                timeout={timeout}
             />
         );
     }
